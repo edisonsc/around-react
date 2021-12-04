@@ -50,7 +50,84 @@ function Main() {
           <ul className="photo-grid"></ul>
         </section>
       </main>
-      <PopupWithForm/>
+      <PopupWithForm name="edit" title="Edit profile" buttonName="Save">
+      <label htmlFor="name" className="form__label">
+      <input
+        type="text"
+        className="form__input form__input_type_name"
+        id="name"
+        name="name"
+        placeholder="Name"
+        minLength="2"
+        maxLength="40"
+        required
+      />
+      <span className="form__error" id="name-error"></span>
+    </label>
+    <label htmlFor="about" className="form__label">
+      <input
+        type="text"
+        className="form__input form__input_type_title"
+        id="about"
+        name="about"
+        placeholder="About me"
+        minLength="2"
+        maxLength="200"
+        required
+      />
+      <span className="form__error" id="about-error"></span>
+    </label></PopupWithForm>
+    
+
+    <PopupWithForm name="add" title="New Place" buttonName="Create">
+    <label htmlFor="name" className="form__label">
+              <input
+                type="text"
+                className="form__input form__input_type_place"
+                id="place-name"
+                name="name"
+                placeholder="Title"
+                minLength="1"
+                maxLength="30"
+                required
+              />
+              <span className="form__error" id="place-name-error"></span>
+            </label>
+            <label htmlFor="link" className="form__label">
+              <input
+                type="url"
+                className="form__input form__input_type_link"
+                id="link"
+                name="link"
+                placeholder="Image link"
+                required
+              />
+              <span className="form__error" id="link-error"></span>
+            </label>
+      </PopupWithForm>
+    
+      <PopupWithForm name="avatar" title="Change profile picture" buttonName="Save">
+      <label htmlFor="link" className="form__label">
+              <input
+                type="url"
+                className="form__input form__input_type_link"
+                id="avatarLink"
+                name="avatarLink"
+                placeholder="Profile image link"
+                required
+              />
+              <span className="form__error" id="avatarLink-error"></span>
+            </label>
+      </PopupWithForm>
+
+      <PopupWithForm name="delete"title="Are you sure?" buttonName="Yes">
+      <input
+              type="hidden"
+              className="form__input form__input_type_card-id"
+              id="id"
+              name="id"
+            />
+      </PopupWithForm>
     </div>
   );
 }
