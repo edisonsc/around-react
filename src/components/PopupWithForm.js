@@ -1,7 +1,7 @@
 function PopupWithForm(props) {
   return (
     <div>
-      <section className={`popup popup_type_${props.name}`}>
+      <section className={`popup popup_type_${props.name}`} onClick={props.isOpen ? 'popup_opened' : '' }>
         <div className="popup__container">
           <button
             aria-label="close"
