@@ -17,3 +17,10 @@ function App() {
 export default App;
 
 
+// onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick
+
+// isEditProfilePopupOpen
+// isAddPlacePopupOpen
+// isEditAvatarPopupOpen
+
+// closeAllPopups()
