@@ -1,29 +1,139 @@
-import {useEffect, useState} from 'react';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
+import { useEffect, useState } from "react";
+import Header from "./Header";
+import Main from "./Main";
+import PopupWithForm from "./PopupWithForm";
+import Footer from "./Footer";
 
 function App() {
-    
-  const [selectedCard, setSelectedCard] = useState('');
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+function closeAllPopups() {
+  setIsEditAvatarPopupOpen(false);
+  setIsEditProfilePopupOpen(false);
+  setIsAddPlacePopupOpen(false);
+}
+
+  // const [selectedCard, setSelectedCard] = useState("");
 
   return (
     <div className="root">
-    <Header/>
-    <Main/>
-    <Footer/>
+      <Header />
+      <Main
+        onEditAvatarClick={handleEditAvatarClick}
+        onEditProfileClick={handleEditProfileClick}
+        onAddPlaceClick={handleAddPlaceClick}
+      />
+      <PopupWithForm
+        name="edit"
+        title="Edit profile"
+        buttonName="Save"
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+      >
+        <label htmlFor="name" className="form__label">
+          <input
+            type="text"
+            className="form__input form__input_type_name"
+            id="name"
+            name="name"
+            placeholder="Name"
+            minLength="2"
+            maxLength="40"
+            required
+          />
+          <span className="form__error" id="name-error"></span>
+        </label>
+        <label htmlFor="about" className="form__label">
+          <input
+            type="text"
+            className="form__input form__input_type_title"
+            id="about"
+            name="about"
+            placeholder="About me"
+            minLength="2"
+            maxLength="200"
+            required
+          />
+          <span className="form__error" id="about-error"></span>
+        </label>
+      </PopupWithForm>
+
+      <PopupWithForm
+        name="add"
+        title="New Place"
+        buttonName="Create"
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+      >
+        <label htmlFor="name" className="form__label">
+          <input
+            type="text"
+            className="form__input form__input_type_place"
+            id="place-name"
+            name="name"
+            placeholder="Title"
+            minLength="1"
+            maxLength="30"
+            required
+          />
+          <span className="form__error" id="place-name-error"></span>
+        </label>
+        <label htmlFor="link" className="form__label">
+          <input
+            type="url"
+            className="form__input form__input_type_link"
+            id="link"
+            name="link"
+            placeholder="Image link"
+            required
+          />
+          <span className="form__error" id="link-error"></span>
+        </label>
+      </PopupWithForm>
+
+      <PopupWithForm
+        name="avatar"
+        title="Change profile picture"
+        buttonName="Save"
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+      >
+        <label htmlFor="link" className="form__label">
+          <input
+            type="url"
+            className="form__input form__input_type_link"
+            id="avatarLink"
+            name="avatarLink"
+            placeholder="Profile image link"
+            required
+          />
+          <span className="form__error" id="avatarLink-error"></span>
+        </label>
+      </PopupWithForm>
+
+      <PopupWithForm name="delete" title="Are you sure?" buttonName="Yes">
+        <input
+          type="hidden"
+          className="form__input form__input_type_card-id"
+          id="id"
+          name="id"
+        />
+      </PopupWithForm>
+      <Footer />
     </div>
   );
-  
-  }
+}
 
 export default App;
 
-
-// onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick
-
-// isEditProfilePopupOpen
-// isAddPlacePopupOpen
-// isEditAvatarPopupOpen
-
-// closeAllPopups()
