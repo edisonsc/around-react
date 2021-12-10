@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import profileImage from "../images/profile-image-jacques.jpg";
 import Card from "./Card";
 import api from "../utils/api";
 
