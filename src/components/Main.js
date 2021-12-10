@@ -14,7 +14,8 @@ function Main(props) {
       setUserName(data.name);
       setUserDescription(data.about);
       setUserAvatar(data.avatar);
-    });
+    })
+    .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
   useEffect(() => {
@@ -27,7 +28,8 @@ function Main(props) {
           id: item._id,
         }))
       );
-    });
+    })
+    .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
   return (
