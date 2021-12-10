@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 import Footer from "./Footer";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  const [selectedCard, setSelectedCard] = useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -18,13 +21,18 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-function closeAllPopups() {
+
+  function handleCardClick(clickedCard){
+    setSelectedCard(clickedCard);
+    console.log("card clicked")
+  }
+  
+ function closeAllPopups() {
   setIsEditAvatarPopupOpen(false);
   setIsEditProfilePopupOpen(false);
   setIsAddPlacePopupOpen(false);
+  setSelectedCard(false)
 }
-
-  // const [selectedCard, setSelectedCard] = useState("");
 
   return (
     <div className="root">
@@ -33,6 +41,7 @@ function closeAllPopups() {
         onEditAvatarClick={handleEditAvatarClick}
         onEditProfileClick={handleEditProfileClick}
         onAddPlaceClick={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
       <PopupWithForm
         name="edit"
@@ -130,6 +139,12 @@ function closeAllPopups() {
           name="id"
         />
       </PopupWithForm>
+
+      <ImagePopup 
+      card={selectedCard}
+      onClose={closeAllPopups}
+       />
+
       <Footer />
     </div>
   );
