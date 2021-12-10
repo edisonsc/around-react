@@ -79,7 +79,6 @@ function Main(props) {
             ))}
           </ul>
         </section>
-
       </main>
     </div>
   );

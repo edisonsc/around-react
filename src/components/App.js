@@ -22,17 +22,16 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleCardClick(clickedCard){
+  function handleCardClick(clickedCard) {
     setSelectedCard(clickedCard);
-    console.log("card clicked")
   }
-  
- function closeAllPopups() {
-  setIsEditAvatarPopupOpen(false);
-  setIsEditProfilePopupOpen(false);
-  setIsAddPlacePopupOpen(false);
-  setSelectedCard(false)
-}
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard(false);
+  }
 
   return (
     <div className="root">
@@ -140,10 +139,7 @@ function App() {
         />
       </PopupWithForm>
 
-      <ImagePopup 
-      card={selectedCard}
-      onClose={closeAllPopups}
-       />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
       <Footer />
     </div>
@@ -151,4 +147,3 @@ function App() {
 }
 
 export default App;
-
