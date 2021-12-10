@@ -10,32 +10,25 @@ function Main(props) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getUser().then(
-      (data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      }
-    );
-  }, 
-  [userName, userDescription, userAvatar]);
+    api.getUser().then((data) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    });
+  }, []);
 
   useEffect(() => {
-    api.getInitialCards().then(
-      (data) => {
-        setCards(
-          data.map(item => (
-            {
-            name: item.name,
-            link: item.link,
-            likes: item.likes.length,
-            id: item._id
-          }
-          ))
-        )
-      });
-  }, 
-[]);
+    api.getInitialCards().then((data) => {
+      setCards(
+        data.map((item) => ({
+          name: item.name,
+          link: item.link,
+          likes: item.likes.length,
+          id: item._id,
+        }))
+      );
+    });
+  }, []);
 
   return (
     <div>
@@ -74,13 +67,20 @@ function Main(props) {
         </section>
         <section className="images">
           <ul className="photo-grid">
-          {cards.map(card => 
- <Card name={card.name} link={card.link} key={card.id} likes={card.likes}/>
-          )} 
+            {cards.map((card) => (
+              <Card
+                name={card.name}
+                link={card.link}
+                key={card.id}
+                likes={card.likes}
+                card={card}
+                onCardClick={props.onCardClick}
+              />
+            ))}
           </ul>
         </section>
+
       </main>
-     
     </div>
   );
 }
