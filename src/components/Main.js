@@ -3,16 +3,12 @@ import Card from "./Card";
 import api from "../utils/api";
 
 function Main(props) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
+  const [user, setUser] = useState("");
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUser().then((data) => {
-      setUserName(data.name);
-      setUserDescription(data.about);
-      setUserAvatar(data.avatar);
+      setUser(data);
     })
     .catch((err) => console.log(`Error: ${err}`));
   }, []);
@@ -43,20 +39,20 @@ function Main(props) {
               onClick={props.onEditAvatarClick}
             >
               <img
-                src={userAvatar}
+                src={user.avatar}
                 alt="Jacques Cousteau"
                 className="profile__image"
               />
             </button>
             <div className="profile__name-area">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{user.name}</h1>
               <button
                 aria-label="edit"
                 type="button"
                 className="button profile__edit-button opacity"
                 onClick={props.onEditProfileClick}
               ></button>
-              <p className="profile__title">{userDescription}</p>
+              <p className="profile__title">{user.about}</p>
             </div>
           </div>
           <button
