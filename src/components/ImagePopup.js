@@ -5,6 +5,7 @@ function ImagePopup(props) {
         props.card ? "popup_opened" : ""
       }`}
     >
+  
       <div className="popup__container popup__container_type_preview">
         <button
           aria-label="close"
@@ -22,4 +23,5 @@ function ImagePopup(props) {
     </div>
   );
 }
+
 export default ImagePopup;
