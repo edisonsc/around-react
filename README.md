@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Around the US React Project
+
+Link to [current project] (https://edisonsc.github.io/around-react/).
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
