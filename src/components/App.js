@@ -10,7 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
-  const [selectedCard, setSelectedCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({})
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -30,7 +30,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({});
   }
 
   return (
@@ -60,7 +60,7 @@ function App() {
             maxLength="40"
             required
           />
-          <span className="form__error" id="name-error"></span>
+          <span className="form__error" id="name-error"/>
         </label>
         <label htmlFor="about" className="form__label">
           <input
@@ -73,7 +73,7 @@ function App() {
             maxLength="200"
             required
           />
-          <span className="form__error" id="about-error"></span>
+          <span className="form__error" id="about-error"/>
         </label>
       </PopupWithForm>
 
@@ -95,7 +95,7 @@ function App() {
             maxLength="30"
             required
           />
-          <span className="form__error" id="place-name-error"></span>
+          <span className="form__error" id="place-name-error"/>
         </label>
         <label htmlFor="link" className="form__label">
           <input
@@ -106,7 +106,7 @@ function App() {
             placeholder="Image link"
             required
           />
-          <span className="form__error" id="link-error"></span>
+          <span className="form__error" id="link-error"/>
         </label>
       </PopupWithForm>
 
@@ -126,7 +126,7 @@ function App() {
             placeholder="Profile image link"
             required
           />
-          <span className="form__error" id="avatarLink-error"></span>
+          <span className="form__error" id="avatarLink-error"/>
         </label>
       </PopupWithForm>
 
