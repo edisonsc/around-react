@@ -3,7 +3,7 @@ import Card from "./Card";
 import api from "../utils/api";
 
 function Main(props) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -80,4 +80,5 @@ function Main(props) {
     </div>
   );
 }
+
 export default Main;
