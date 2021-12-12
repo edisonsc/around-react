@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Card from "./Card";
 import api from "../utils/api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  const [user, setUser] = useState({});
+ 
   const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api.getUser().then((data) => {
-      setUser(data);
-    })
-    .catch((err) => console.log(`Error: ${err}`));
-  }, []);
+  const user = useContext(CurrentUserContext)
 
   useEffect(() => {
     api.getInitialCards().then((data) => {
@@ -26,6 +21,8 @@ function Main(props) {
     })
     .catch((err) => console.log(`Error: ${err}`));
   }, []);
+
+ 
 
   return (
     <div>
