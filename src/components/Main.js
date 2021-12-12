@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function Main(props) {
  
   const [cards, setCards] = useState([]);
-  const user = useContext(CurrentUserContext)
+  const currentUser = useContext(CurrentUserContext)
 
   useEffect(() => {
     api.getInitialCards().then((data) => {
@@ -36,20 +36,20 @@ function Main(props) {
               onClick={props.onEditAvatarClick}
             >
               <img
-                src={user.avatar}
+                src={currentUser.avatar}
                 alt="Jacques Cousteau"
                 className="profile__image"
               />
             </button>
             <div className="profile__name-area">
-              <h1 className="profile__name">{user.name}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 aria-label="edit"
                 type="button"
                 className="button profile__edit-button opacity"
                 onClick={props.onEditProfileClick}
               ></button>
-              <p className="profile__title">{user.about}</p>
+              <p className="profile__title">{currentUser.about}</p>
             </div>
           </div>
           <button
