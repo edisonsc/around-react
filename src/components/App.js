@@ -3,6 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import Footer from "./Footer";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -47,6 +48,24 @@ function App() {
     setSelectedCard({});
   }
 
+   function handleUpdateUser() {
+    api.setUser().then((data) => {
+    setCurrentUser(data || '');
+    closeAllPopups();  
+  })
+   .catch((err) => console.log(`Error: ${err}`));
+  }
+
+  function onOpen() {
+    api.setUser().then((data) => {
+    setCurrentUser(data || '');
+    closeAllPopups();  
+  })
+   .catch((err) => console.log(`Error: ${err}`));
+  }
+
+  onOpen()
+
   return (
    
     <div className="root">
@@ -58,40 +77,11 @@ function App() {
         onAddPlaceClick={handleAddPlaceClick}
         onCardClick={handleCardClick}
       />
-      <PopupWithForm
-        name="edit"
-        title="Edit profile"
-        buttonName="Save"
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <label htmlFor="name" className="form__label">
-          <input
-            type="text"
-            className="form__input form__input_type_name"
-            id="name"
-            name="name"
-            placeholder="Name"
-            minLength="2"
-            maxLength="40"
-            required
-          />
-          <span className="form__error" id="name-error"/>
-        </label>
-        <label htmlFor="about" className="form__label">
-          <input
-            type="text"
-            className="form__input form__input_type_title"
-            id="about"
-            name="about"
-            placeholder="About me"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span className="form__error" id="about-error"/>
-        </label>
-      </PopupWithForm>
+      <EditProfilePopup 
+      isOpen={isEditProfilePopupOpen} 
+      onClose={closeAllPopups} 
+      onUpdateUser={handleUpdateUser}
+      />
 
       <PopupWithForm
         name="add"
