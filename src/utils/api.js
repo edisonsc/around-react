@@ -62,14 +62,13 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  setUser(name, about, avatar) {
+  setUser(name, about) {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
         name,
-        about,
-        avatar,
+        about
       }),
     }).then(this._handleResponse);
   }
