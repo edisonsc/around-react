@@ -4,6 +4,7 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import Footer from "./Footer";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -17,6 +18,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({})
 
   const [currentUser, setCurrentUser] = useState({})
+
 
   useEffect(() => {
     api.getUser().then((data) => {
@@ -48,24 +50,21 @@ function App() {
     setSelectedCard({});
   }
 
-   function handleUpdateUser() {
-    api.setUser().then((data) => {
-    setCurrentUser(data || '');
-    closeAllPopups();  
+   function handleUpdateUser({name, about}) {
+    api.setUser(name, about).then((data) => {
+    setCurrentUser(data);
+    closeAllPopups()
   })
    .catch((err) => console.log(`Error: ${err}`));
   }
 
-  function onOpen() {
-    api.setUser().then((data) => {
-    setCurrentUser(data || '');
-    closeAllPopups();  
-  })
-   .catch((err) => console.log(`Error: ${err}`));
-  }
-
-  onOpen()
-
+  
+ function handleUpdateAvatar(){
+   api.setAvatar().then((data) => {
+    setCurrentUser(data)
+   })
+   }
+  
   return (
    
     <div className="root">
@@ -116,25 +115,10 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm
-        name="avatar"
-        title="Change profile picture"
-        buttonName="Save"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      >
-        <label htmlFor="link" className="form__label">
-          <input
-            type="url"
-            className="form__input form__input_type_link"
-            id="avatarLink"
-            name="avatarLink"
-            placeholder="Profile image link"
-            required
-          />
-          <span className="form__error" id="avatarLink-error"/>
-        </label>
-      </PopupWithForm>
+      <EditAvatarPopup 
+      isOpen={isEditAvatarPopupOpen} 
+      onClose={closeAllPopups}
+      onUpdateAvatar={handleUpdateAvatar} />
 
       <PopupWithForm name="delete" title="Are you sure?" buttonName="Yes">
         <input
