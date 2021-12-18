@@ -14,7 +14,7 @@ const [description, setDescription] = React.useState('')
 
 // After loading the current user from the API
 // their data will be used in managed components.
-React.useEffect(() => {
+useEffect(() => {
   if(currentUser){
   setName(currentUser.name);
   setDescription(currentUser.about);
@@ -31,16 +31,14 @@ setDescription(e.target.value)
 }
 
 function handleSubmit(e) {
-    // Prevent the browser from navigating to the form address
     e.preventDefault();
-  
-    // Pass the values of the managed components to the external handler
     props.onUpdateUser({
       name,
       about: description,
     });
   } 
 
+ 
 return(
 <PopupWithForm
         name="edit"
