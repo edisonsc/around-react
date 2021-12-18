@@ -58,10 +58,11 @@ function App() {
    .catch((err) => console.log(`Error: ${err}`));
   }
 
-  
- function handleUpdateAvatar(){
-   api.setAvatar().then((data) => {
-    setCurrentUser(data)
+
+ function handleUpdateAvatar({value}){
+   api.setAvatar(value).then((data) => {
+    setCurrentUser(data);
+    closeAllPopups()
    })
    }
   
