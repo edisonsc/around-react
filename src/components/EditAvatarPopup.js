@@ -3,7 +3,7 @@ import React from "react";
 
 function EditAvatarPopup(props) {
   const [value, setValue] = React.useState("");
-  const avatarRef = React.createRef();
+  const avatarRef = React.useRef();
 
   function handleChange(e) {
     setValue(e.target.value);
@@ -11,7 +11,7 @@ function EditAvatarPopup(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar({
-      avatar: { avatarRef },
+      avatar: { value },
     });
   }
 
