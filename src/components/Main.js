@@ -4,29 +4,40 @@ import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
- 
   const [cards, setCards] = useState([]);
-  const currentUser = useContext(CurrentUserContext)
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    api.getInitialCards().then((data) => {
-      console.log(data)
-      setCards(
-        data.map((item, id) => ({
-          name: item.name,
-          link: item.link,
-          likes: item.likes.length,
-          id: item._id,
-          owner: item.owner._id,
-          key: item.id
-  
-        }))
-      );
-    })
-    .catch((err) => console.log(`Error: ${err}`));
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(
+          data.map((item) => ({
+            name: item.name,
+            link: item.link,
+            likes: item.likes,
+            id: item._id,
+            owner: item.owner._id,
+          }))
+        );
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
+  function handleCardLike(card) {
+    // Check one more time if this card was already liked
+    const isLiked = card.card.likes.some((i) => i._id === currentUser._id);
+    // Send a request to the API and getting the updated card data
+    api.addLike(card.card.id, !isLiked).then((newCard) => {
+
+      setCards((state) => state.map((c) => (c._id === card.card.id ? newCard : c)));
+    }
+    ); 
+  }
  
+
+
+
 
   return (
     <div>
@@ -63,6 +74,7 @@ function Main(props) {
             onClick={props.onAddPlaceClick}
           ></button>
         </section>
+
         <section className="images">
           <ul className="photo-grid">
             {cards.map((card) => (
@@ -73,6 +85,7 @@ function Main(props) {
                 likes={card.likes}
                 card={card}
                 onCardClick={props.onCardClick}
+                onCardLike={handleCardLike}
               />
             ))}
           </ul>

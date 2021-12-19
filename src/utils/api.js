@@ -36,12 +36,13 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  addLike(_id) {
+  addLike(_id, liked) {
     return fetch(`${this._baseUrl}cards/likes/${_id}`, {
       headers: this._headers,
       method: "PUT",
       body: JSON.stringify({
         _id,
+        liked
       }),
     }).then(this._handleResponse);
   }
