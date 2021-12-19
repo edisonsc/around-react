@@ -28,13 +28,22 @@ function Main(props) {
     // Check one more time if this card was already liked
     const isLiked = card.card.likes.some((i) => i._id === currentUser._id);
     // Send a request to the API and getting the updated card data
+
+    
     api.addLike(card.card.id, !isLiked).then((newCard) => {
 
       setCards((state) => state.map((c) => (c._id === card.card.id ? newCard : c)));
     }
     ); 
+  
+}
+  function handleCardDelete(card) {
+    api.deleteCard(card.card.id).then((deletedCard) => {
+      
+    console.log(card)
+      
+    })
   }
- 
 
 
 
@@ -86,6 +95,7 @@ function Main(props) {
                 card={card}
                 onCardClick={props.onCardClick}
                 onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
               />
             ))}
           </ul>
