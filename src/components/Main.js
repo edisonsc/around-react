@@ -10,12 +10,16 @@ function Main(props) {
 
   useEffect(() => {
     api.getInitialCards().then((data) => {
+      console.log(data)
       setCards(
-        data.map((item) => ({
+        data.map((item, id) => ({
           name: item.name,
           link: item.link,
           likes: item.likes.length,
           id: item._id,
+          owner: item.owner._id,
+          key: item.id
+  
         }))
       );
     })
