@@ -14,9 +14,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
-
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({})
-
   const [currentUser, setCurrentUser] = useState({})
 
 
@@ -66,6 +65,41 @@ function App() {
    })
    .catch((err) => console.log(`Error: ${err}`));
    }
+
+   useEffect(() => {
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(
+          data.map((item) => ({
+            name: item.name,
+            link: item.link,
+            likes: item.likes,
+            id: item._id,
+            owner: item.owner._id,
+          }))
+        );
+      })
+      .catch((err) => console.log(`Error: ${err}`));
+  }, []);
+  
+  function handleCardLike(card) {
+    // Check one more time if this card was already liked
+    const isLiked = card.card.likes.some((i) => i._id === currentUser._id);
+    // Send a request to the API and getting the updated card data
+
+    api.addLike(card.card.id, !isLiked).then((newCard) => {
+      setCards((state) =>
+        state.map((c) => (c._id === card.card.id ? newCard : c))
+      );
+    });
+  }
+  function handleCardDelete(card) {
+    api.deleteCard(card.card.id).then((deletedCard) =>{
+      setCards((state) => 
+      state.filter((c) => (c._id === deletedCard.id)))
+    });
+  }
   
   return (
    
@@ -77,6 +111,9 @@ function App() {
         onEditProfileClick={handleEditProfileClick}
         onAddPlaceClick={handleAddPlaceClick}
         onCardClick={handleCardClick}
+        cards ={cards}
+        onCardLike={handleCardLike}
+        onCardDelete={handleCardDelete}
       />
       <EditProfilePopup 
       isOpen={isEditProfilePopupOpen} 
