@@ -59,11 +59,12 @@ function App() {
   }
 
 
- function handleUpdateAvatar({value}){
-   api.setAvatar(value).then((data) => {
+ function handleUpdateAvatar({avatar}){
+   api.setAvatar(avatar).then((data) => {
     setCurrentUser(data);
     closeAllPopups()
    })
+   .catch((err) => console.log(`Error: ${err}`));
    }
   
   return (
