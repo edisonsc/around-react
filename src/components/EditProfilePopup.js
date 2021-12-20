@@ -1,7 +1,5 @@
 import React from 'react';
-import {useEffect, useState, useContext} from 'react';
 import PopupWithForm from "./PopupWithForm";
-import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
@@ -14,7 +12,7 @@ const [description, setDescription] = React.useState('')
 
 // After loading the current user from the API
 // their data will be used in managed components.
-useEffect(() => {
+React.useEffect(() => {
   if(currentUser){
   setName(currentUser.name);
   setDescription(currentUser.about);
