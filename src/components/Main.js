@@ -29,24 +29,18 @@ function Main(props) {
     const isLiked = card.card.likes.some((i) => i._id === currentUser._id);
     // Send a request to the API and getting the updated card data
 
-    
     api.addLike(card.card.id, !isLiked).then((newCard) => {
-
-      setCards((state) => state.map((c) => (c._id === card.card.id ? newCard : c)));
-    }
-    ); 
-  
-}
-  function handleCardDelete(card) {
-    api.deleteCard(card.card.id).then((deletedCard) => {
-      
-    console.log(card)
-      
-    })
+      setCards((state) =>
+        state.map((c) => (c._id === card.card.id ? newCard : c))
+      );
+    });
   }
-
-
-
+  function handleCardDelete(card) {
+    api.deleteCard(card.card.id).then((deletedCard) =>{
+      setCards((state) => 
+      state.filter((c) => (c._id === deletedCard.id)))
+    });
+  }
 
   return (
     <div>
