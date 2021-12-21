@@ -97,11 +97,14 @@ function App() {
     api.addLike(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
-}
+
+  }
+
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then((deletedCard) => {
-      setCards((state) => state.filter((c) => c._id === deletedCard._id));
+      console.log(deletedCard)
+      setCards((state) => state.filter((deletedCard => deletedCard._id )))
     });
   }
 
