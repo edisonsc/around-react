@@ -1,14 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import React from "react";
 import Card from "./Card";
-import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  
-  const currentUser = useContext(CurrentUserContext);
-
-  
-  
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <div>
@@ -48,16 +43,18 @@ function Main(props) {
 
         <section className="images">
           <ul className="photo-grid">
-            {props.cards.map((card) => (
+            {props.cards.map((card, id) => (
               <Card
                 name={card.name}
                 link={card.link}
-                key={card.id}
+                owner={card.owner}
+                _id={card._id}
                 likes={card.likes}
                 card={card}
                 onCardClick={props.onCardClick}
                 onCardLike={props.onCardLike}
                 onCardDelete={props.onCardDelete}
+                
               />
             ))}
           </ul>
@@ -68,3 +65,4 @@ function Main(props) {
 }
 
 export default Main;
+
