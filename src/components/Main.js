@@ -55,7 +55,6 @@ function Main(props) {
                 onCardLike={props.onCardLike}
                 onCardDelete={props.onCardDelete}
                 key={id}
-                
               />
             ))}
           </ul>
@@ -66,4 +65,3 @@ function Main(props) {
 }
 
 export default Main;
-

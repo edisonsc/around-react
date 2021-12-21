@@ -46,14 +46,6 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  changeLikeStatus(_id, likeStatus) {
-    if (likeStatus) {
-      return this.addLike(_id);
-    } else {
-      return this.deleteLike(_id);
-    }
-  }
-
   deleteLike(_id) {
     return fetch(`${this._baseUrl}cards/likes/${_id}`, {
       headers: this._headers,
@@ -62,6 +54,14 @@ class Api {
         _id,
       }),
     }).then(this._handleResponse);
+  }
+
+  changeLikeStatus(_id, likeStatus) {
+    if (likeStatus) {
+      return this.addLike(_id);
+    } else {
+      return this.deleteLike(_id);
+    }
   }
 
   getUser() {

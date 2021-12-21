@@ -8,13 +8,6 @@ function AddPlacePopup(props) {
   const nameRef = React.useRef(null);
   const linkRef = React.useRef(null);
 
-  // React.useEffect(() => {
-    
-  //   setName(name);
-  //   setLink(link);
-    
-  // }, [name, link]);
-
   function handleTitleChange(e) {
     setName(e.target.value);
   }
