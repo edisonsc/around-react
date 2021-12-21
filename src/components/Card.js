@@ -30,7 +30,7 @@ function Card(props) {
 
 // Create a variable which you then set in `className` for the like button
  const cardLikeButtonClassName = `opacity photo-grid__heart-icon ${
-  isLiked ? "photo-grid__heart-icon_active" : "photo-grid__heart-icon"
+  isLiked ? "photo-grid__heart-icon_active" : "photo-grid__heart-icon_disabled"
  }`; 
 
 

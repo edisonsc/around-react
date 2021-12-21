@@ -28,6 +28,7 @@
 @import url(./blocks/photo-grid/__title/photo-grid__title.css);
 @import url(./blocks/photo-grid/__heart-icon/photo-grid__heart-icon.css);
 @import url(./blocks/photo-grid/__heart-icon/_active/photo-grid__heart-icon_active.css);
+@import url(./blocks/photo-grid/__heart-icon/_disabled/photo-grid__heart-icon_disabled.css);
 @import url(./blocks/photo-grid/__delete-icon/photo-grid__delete-icon.css);
 @import url(./blocks/photo-grid/__delete-icon/_hidden/photo-grid__delete-icon_hidden.css);
 @import url(./blocks/photo-grid/__delete-icon/_visible/photo-grid__delete-icon_visible.css);
