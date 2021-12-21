@@ -5,10 +5,7 @@ function AddPlacePopup(props) {
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
 
-  const nameRef = React.useRef(null);
-  const linkRef = React.useRef(null);
-
-  function handleTitleChange(e) {
+   function handleTitleChange(e) {
     setName(e.target.value);
   }
 
@@ -22,9 +19,13 @@ function AddPlacePopup(props) {
       name: name,
       link: link,
     });
-    setLink("");
-    setName("");
   }
+
+  React.useEffect(() => {
+    setName('');
+    setLink('');
+}, [props.isOpen]);
+
 
   return (
     <PopupWithForm
@@ -47,7 +48,6 @@ function AddPlacePopup(props) {
           maxLength="30"
           required
           value={name}
-          ref={nameRef}
           onChange={handleTitleChange}
         />
         <span className="form__error" id="place-name-error" />
@@ -61,7 +61,6 @@ function AddPlacePopup(props) {
           placeholder="Image link"
           required
           value={link}
-          ref={linkRef}
           onChange={handleLinkChange}
         />
         <span className="form__error" id="link-error" />
