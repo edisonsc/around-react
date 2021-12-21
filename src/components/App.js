@@ -81,31 +81,36 @@ function App() {
             link: item.link,
             likes: item.likes,
             _id: item._id,
-            owner: item.owner
+            owner: item.owner,
           }))
         );
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
-
   function handleCardLike(card) {
     // Check one more time if this card was already liked
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    console.log(isLiked)
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Send a request to the API and getting the updated card data
-    api.changeLikeStatus(card._id, !isLiked).then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-
+    api
+      .changeLikeStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }
 
-
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then((deletedCard) => {
-      console.log(deletedCard)
-      setCards((state) => state.filter((deletedCard => deletedCard._id )))
-    });
+    api
+      .deleteCard(card._id)
+      .then((deletedCard) => {
+        setCards((state) =>
+          state.filter((deletedCard) => deletedCard._id !== card._id)
+        );
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }
 
   function handleAddPlace(data) {
