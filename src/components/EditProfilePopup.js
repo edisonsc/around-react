@@ -1,84 +1,81 @@
-import React from 'react';
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
+  // Subscription to the context
+  const currentUser = React.useContext(CurrentUserContext);
 
-// Subscription to the context
-const currentUser = React.useContext(CurrentUserContext);
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
-const [name, setName] = React.useState('');
-const [description, setDescription] = React.useState('')
+  // After loading the current user from the API
+  // their data will be used in managed components.
+  React.useEffect(() => {
+    if (currentUser) {
+      setName(currentUser.name);
+      setDescription(currentUser.about);
+    }
+  }, [currentUser, props.isOpen]);
 
-// After loading the current user from the API
-// their data will be used in managed components.
-React.useEffect(() => {
-  if(currentUser){
-  setName(currentUser.name);
-  setDescription(currentUser.about);
-  }
-}, [currentUser, props.isOpen]);
-
-
-function handleNameChange(e){
+  function handleNameChange(e) {
     setName(e.target.value);
-}
+  }
 
-function handleDescriptionChange(e){
-setDescription(e.target.value)
-}
+  function handleDescriptionChange(e) {
+    setDescription(e.target.value);
+  }
 
-function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateUser({
       name,
       about: description,
     });
-  } 
+  }
 
- 
-return(
-<PopupWithForm
-        name="edit"
-        title="Edit profile"
-        buttonName="Save"
-        isOpen={props.isOpen}
-        onClose={props.onClose}
-        onSubmit={handleSubmit}
-        onUpdateUser={props.onUpdateUser}
-      >
-        <label htmlFor="name" className="form__label">
-          <input
-            type="text"
-            className="form__input form__input_type_name"
-            id="name"
-            name="name"
-            placeholder="Name"
-            minLength="2"
-            maxLength="40"
-            required
-            value={name || ''}
-            onChange={handleNameChange}
-          />
-          <span className="form__error" id="name-error"/>
-        </label>
-        <label htmlFor="about" className="form__label">
-          <input
-            type="text"
-            className="form__input form__input_type_title"
-            id="about"
-            name="about"
-            placeholder="About me"
-            minLength="2"
-            maxLength="200"
-            required
-            value={description || ''}
-            onChange={handleDescriptionChange}
-          />
-          <span className="form__error" id="about-error"/>
-        </label>
-      </PopupWithForm>
-)
+  return (
+    <PopupWithForm
+      name="edit"
+      title="Edit profile"
+      buttonName="Save"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
+      onUpdateUser={props.onUpdateUser}
+    >
+      <label htmlFor="name" className="form__label">
+        <input
+          type="text"
+          className="form__input form__input_type_name"
+          id="name"
+          name="name"
+          placeholder="Name"
+          minLength="2"
+          maxLength="40"
+          required
+          value={name || ""}
+          onChange={handleNameChange}
+        />
+        <span className="form__error" id="name-error" />
+      </label>
+      <label htmlFor="about" className="form__label">
+        <input
+          type="text"
+          className="form__input form__input_type_title"
+          id="about"
+          name="about"
+          placeholder="About me"
+          minLength="2"
+          maxLength="200"
+          required
+          value={description || ""}
+          onChange={handleDescriptionChange}
+        />
+        <span className="form__error" id="about-error" />
+      </label>
+    </PopupWithForm>
+  );
 }
 
-export default EditProfilePopup
+export default EditProfilePopup;
