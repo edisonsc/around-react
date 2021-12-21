@@ -36,15 +36,22 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  addLike(_id, isLiked) {
+  addLike(_id) {
     return fetch(`${this._baseUrl}cards/likes/${_id}`, {
       headers: this._headers,
       method: "PUT",
       body: JSON.stringify({
         _id,
-       isLiked
       }),
     }).then(this._handleResponse);
+  }
+
+  changeLikeStatus(_id, likeStatus) {
+    if (likeStatus) {
+      return this.addLike(_id);
+    } else {
+      return this.deleteLike(_id);
+    }
   }
 
   deleteLike(_id) {
@@ -69,7 +76,7 @@ class Api {
       method: "PATCH",
       body: JSON.stringify({
         name,
-        about
+        about,
       }),
     }).then(this._handleResponse);
   }
