@@ -18,7 +18,7 @@ function Main(props) {
             >
               <img
                 src={currentUser.avatar}
-                alt="Jacques Cousteau"
+                alt={`avatar of ${currentUser.name}`}
                 className="profile__image"
               />
             </button>
@@ -43,7 +43,7 @@ function Main(props) {
 
         <section className="images">
           <ul className="photo-grid">
-            {props.cards.map((card, id) => (
+            {props.cards.map((card, _id) => (
               <Card
                 name={card.name}
                 link={card.link}
@@ -54,7 +54,7 @@ function Main(props) {
                 onCardClick={props.onCardClick}
                 onCardLike={props.onCardLike}
                 onCardDelete={props.onCardDelete}
-                key={id}
+                key={card._id}
               />
             ))}
           </ul>
