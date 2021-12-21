@@ -117,7 +117,8 @@ function App() {
     api.addCard(data).then((newCard) => {
       setCards([newCard, ...cards]);
       closeAllPopups();
-    });
+    })
+    .catch((err) => console.log(`Error: ${err}`));
   }
 
   return (
@@ -153,7 +154,6 @@ function App() {
 
         <PopupWithForm name="delete" title="Are you sure?" buttonName="Yes">
           <input
-            type="hidden"
             className="form__input form__input_type_card-id"
             id="id"
             name="id"
