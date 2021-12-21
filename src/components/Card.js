@@ -35,7 +35,6 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
 
 
   return (
-    <div>
       <li className="photo-grid__card">
         <button
           aria-label="delete"
@@ -63,7 +62,6 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
           </div>
         </div>
       </li>
-    </div>
   );
 }
 
