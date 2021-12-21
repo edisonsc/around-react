@@ -2,23 +2,25 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
-function Card(props) {
+function Card({card, onCardClick, onCardLike, onCardDelete}) {
   const currentUser = useContext(CurrentUserContext);
 
   function handleClick() {
-    props.onCardClick(props);
+    onCardClick(card);
+    console.log(card.owner._id)
+    console.log(currentUser._id)
   }
 
   function handleLikeClick () {
-    props.onCardLike(props);
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props)
+    onCardDelete(card)
   }
 
   // Checking if the current user is the owner of the current card
-  const isOwn = props.card.owner === currentUser._id;
+  const isOwn = card.owner._id === currentUser._id;
 
   // Creating a variable which you'll then set in `className` for the delete button
   const cardDeleteButtonClassName = `photo-grid__delete-icon ${
@@ -26,7 +28,7 @@ function Card(props) {
   }`;
 
 //   // Check if the card was liked by the current user
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
 
 // Create a variable which you then set in `className` for the like button
  const cardLikeButtonClassName = `opacity photo-grid__heart-icon ${
@@ -45,12 +47,12 @@ function Card(props) {
         ></button>
         <img
           className="photo-grid__image"
-          alt={props.name}
-          src={props.link}
+          alt={card.name}
+          src={card.link}
           onClick={handleClick}
         />
         <div className="photo-grid__content">
-          <h2 className="photo-grid__title">{props.name}</h2>
+          <h2 className="photo-grid__title">{card.name}</h2>
           <div className="photo-grid__likes">
             <button
               aria-label="like"
@@ -59,7 +61,7 @@ function Card(props) {
               className={cardLikeButtonClassName}
               onClick={handleLikeClick}
             ></button>
-            <p className="photo-grid__text">{props.likes.length}</p>
+            <p className="photo-grid__text">{card.likes.length}</p>
           </div>
         </div>
       </li>
