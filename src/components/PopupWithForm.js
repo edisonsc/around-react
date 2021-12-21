@@ -1,6 +1,5 @@
 function PopupWithForm(props) {
   return (
-    <div>
       <section
         className={`popup popup_type_${props.name} ${
           props.isOpen && "popup_opened"
@@ -17,21 +16,18 @@ function PopupWithForm(props) {
           <form
             className="form"
             name={`${props.name}-form`}
-            noValidate
             onSubmit={props.onSubmit}
           >
             {props.children}
             <button
               type="submit"
               className="form__button opacity"
-              id="save-button"
             >
               {props.buttonName}
             </button>
           </form>
         </div>
       </section>
-    </div>
   );
 }
 
