@@ -2,18 +2,13 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
 function EditAvatarPopup(props) {
-  const [value, setValue] = React.useState("");
   const avatarRef = React.useRef(null);
 
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar({
-      avatar: value,
+      avatar: avatarRef.current.value,
     });
-    setValue("");
   }
 
   return (
@@ -33,9 +28,7 @@ function EditAvatarPopup(props) {
           id="avatarLink"
           name="avatarLink"
           placeholder="Profile image link"
-          onChange={handleChange}
           ref={avatarRef}
-          value={value}
           required
         />
         <span className="form__error" id="avatarLink-error" />
